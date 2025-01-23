@@ -52,7 +52,8 @@ export const RegistrationForm = () => {
   const prevStep = () => setStep((prev) => prev - 1);
 
   return (
-    <div className="border px-10 py-5 bg-zinc-700 rounded-2xl flex justify-center max-w-96">
+    <div className=" relative border px-10 py-5 bg-zinc-700 rounded-2xl flex justify-center max-w-96">
+      <div className="absolute right-3 top-3 text-white text-lg"> {step}/4</div>
       {step === 1 && (
         <form className="flex flex-col gap-2">
           <h1 className="text-2xl text-white strong m-auto py-4">
