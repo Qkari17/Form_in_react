@@ -11,8 +11,10 @@ export const RegistrationForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    trigger,
   } = useForm<RegistrationFormData>({
     resolver: zodResolver(validationSchema),
+    mode: "onChange",
   });
   const handleRegistrationForm: SubmitHandler<RegistrationFormData> = (
     data
@@ -20,7 +22,24 @@ export const RegistrationForm = () => {
     console.log(data);
   };
 
-  const nextStep = () => setStep((prev) => prev + 1);
+  const nextStep = async () => {
+    let isValid = false;
+
+    // Walidacja dla poszczególnych kroków
+    if (step === 1) {
+      isValid = await trigger(["username", "password", "email"]);
+    } else if (step === 2) {
+      isValid = await trigger(["name", "surname"]);
+    }else if (step === 3) {
+        isValid = true
+      }
+
+    // Jeśli dane są poprawne, przejdź do kolejnego kroku
+    if (isValid) {
+      setStep((prev) => prev + 1);
+    }
+  };
+
   const prevStep = () => setStep((prev) => prev - 1);
 
   return (
@@ -45,7 +64,7 @@ export const RegistrationForm = () => {
             type="email"
             error={errors.email}
           ></Input>
-          <Button label="Next" onClick={nextStep}></Button>
+          <Button label="Next" type="button" onClick={nextStep}></Button>
         </form>
       )}
       {step === 2 && (
@@ -58,7 +77,7 @@ export const RegistrationForm = () => {
             error={errors.surname}
           ></Input>
           <Button label="Back" onClick={prevStep}></Button>
-          <Button label="Next" onClick={nextStep}></Button>
+          <Button label="Next" type="button" onClick={nextStep}></Button>
         </form>
       )}
       {step === 3 && (
@@ -66,7 +85,7 @@ export const RegistrationForm = () => {
           <h1>User Hobbies</h1>
 
           <Button label="Back" onClick={prevStep}></Button>
-          <Button label="Next" onClick={nextStep}></Button>
+          <Button label="Next" type="button" onClick={nextStep}></Button>
         </form>
       )}
       {step === 4 && (
@@ -83,4 +102,3 @@ export const RegistrationForm = () => {
     </div>
   );
 };
-
