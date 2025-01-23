@@ -31,6 +31,7 @@ export const RegistrationForm = () => {
     data
   ) => {
     console.log(data);
+    setStep((prev) => prev + 1);
   };
 
   const nextStep = async () => {
@@ -53,7 +54,7 @@ export const RegistrationForm = () => {
 
   return (
     <div className=" relative border px-10 py-5 bg-zinc-700 rounded-2xl flex justify-center max-w-96">
-      <div className="absolute right-3 top-3 text-white text-lg"> {step}/4</div>
+      <div className="absolute right-3 top-3 text-white text-lg"> {step}/5</div>
       {step === 1 && (
         <form className="flex flex-col gap-2">
           <h1 className="text-2xl text-white strong m-auto py-4">
@@ -182,6 +183,11 @@ export const RegistrationForm = () => {
           </div>
         </form>
       )}
+      {step === 5 && (<div>
+        <h1 className="text-2xl text-white strong m-auto py-4">End screen</h1>
+  <p className="text-2xl text-white strong m-auto py-4">Thanks for completing my form!</p>
+  </div>
+  )}
     </div>
   );
 };
