@@ -114,12 +114,12 @@ export const RegistrationForm = () => {
                 label="Remove"
                 type="button"
                 onClick={() => remove(index)}
-                className="bg-transparent border-0 hover:bg-transparent d hover:text-slate-200"
+                className="bg-transparent border-0 border-transparent hover:bg-transparent d hover:text-slate-200"
               />
             </div>
           ))}
           <Button
-          className="w-40 bg-lime-600 hover:bg-lime-700"
+            className="w-40 bg-lime-600 hover:bg-lime-700"
             label="Add hobby"
             type="button"
             onClick={() => {
@@ -143,7 +143,9 @@ export const RegistrationForm = () => {
         >
           <h1 className="text-2xl text-white strong m-auto py-4">Result</h1>
           <div className="p-4 border rounded flex flex-col items-center">
-            <h2 className="text-2xl text-white strong m-auto py-4">Form Summary:</h2>
+            <h2 className="text-2xl text-white strong m-auto py-4">
+              Form Summary:
+            </h2>
             <ul className=" text-white">
               <li>
                 <strong>Username:</strong> {watch("username")}
@@ -171,8 +173,13 @@ export const RegistrationForm = () => {
             </ul>
           </div>
           <div className="flex justify-between my-2">
-          <Button label="Back" onClick={prevStep}></Button>
-          <Button className="bg-cyan-600 hover:bg-cyan-700" label="Send" type="submit"></Button></div>
+            <Button label="Back" onClick={prevStep}></Button>
+            <Button
+              className="bg-cyan-600 hover:bg-cyan-700"
+              label="Send"
+              type="submit"
+            ></Button>
+          </div>
         </form>
       )}
     </div>
