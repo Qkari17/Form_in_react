@@ -52,10 +52,12 @@ export const RegistrationForm = () => {
   const prevStep = () => setStep((prev) => prev - 1);
 
   return (
-    <div>
+    <div className="border px-10 py-5 bg-zinc-700 rounded-2xl flex justify-center max-w-96">
       {step === 1 && (
         <form className="flex flex-col gap-2">
-          <h1>User base info</h1>
+          <h1 className="text-2xl text-white strong m-auto py-4">
+            User base info
+          </h1>
           <Input
             label="Username"
             {...register("username")}
@@ -73,27 +75,35 @@ export const RegistrationForm = () => {
             type="email"
             error={errors.email}
           ></Input>
-          <Button label="Next" type="button" onClick={nextStep}></Button>
+          <div className="flex justify-end my-2">
+            <Button label="Next" type="button" onClick={nextStep}></Button>
+          </div>
         </form>
       )}
       {step === 2 && (
         <form className="flex flex-col gap-2">
-          <h1>User personal indo</h1>
+          <h1 className="text-2xl text-white strong m-auto py-4">
+            User personal info
+          </h1>
           <Input label="Name" {...register("name")} error={errors.name}></Input>
           <Input
             label="Surname"
             {...register("surname")}
             error={errors.surname}
           ></Input>
-          <Button label="Back" onClick={prevStep}></Button>
-          <Button label="Next" type="button" onClick={nextStep}></Button>
+          <div className="flex justify-between my-2">
+            <Button label="Back" onClick={prevStep}></Button>
+            <Button label="Next" type="button" onClick={nextStep}></Button>
+          </div>
         </form>
       )}
       {step === 3 && (
         <form className="flex flex-col gap-2">
-          <h1>User Hobbies</h1>
+          <h1 className="text-2xl text-white strong m-auto py-4">
+            User hobbies
+          </h1>
           {fields.map((field, index) => (
-            <div key={field.id} className="flex items-center gap-2">
+            <div key={field.id} className="flex flex-col ">
               <Input
                 label={`Hobby ${index + 1}`}
                 {...register(`hobbies.${index}.hobby` as const)}
@@ -103,11 +113,13 @@ export const RegistrationForm = () => {
                 label="Remove"
                 type="button"
                 onClick={() => remove(index)}
+                className="bg-transparent border-0 hover:bg-transparent d hover:text-slate-200"
               />
             </div>
           ))}
           <Button
-            label="Add Hobby"
+          className="w-40 bg-lime-600 hover:bg-lime-700"
+            label="Add hobby"
             type="button"
             onClick={() => {
               if (fields.length < MAX_HOBBIES) {
@@ -117,9 +129,10 @@ export const RegistrationForm = () => {
               }
             }}
           />
-
-          <Button label="Back" onClick={prevStep}></Button>
-          <Button label="Next" type="button" onClick={nextStep}></Button>
+          <div className="flex justify-between my-2">
+            <Button label="Back" onClick={prevStep}></Button>
+            <Button label="Next" type="button" onClick={nextStep}></Button>
+          </div>
         </form>
       )}
       {step === 4 && (
@@ -127,39 +140,38 @@ export const RegistrationForm = () => {
           className="flex flex-col gap-2"
           onSubmit={handleSubmit(handleRegistrationForm)}
         >
-          <h1>Result</h1>
-          <div className="p-4 border rounded">
-      <h2>Form Summary:</h2>
-      <ul>
-        <li>
-          <strong>Username:</strong> {watch("username")}
-        </li>
-        <li>
-          <strong>Password:</strong> {watch("password")}
-        </li>
-        <li>
-          <strong>Email:</strong> {watch("email")}
-        </li>
-        <li>
-          <strong>Name:</strong> {watch("name")}
-        </li>
-        <li>
-          <strong>Surname:</strong> {watch("surname")}
-        </li>
-        <li>
-          <strong>Hobbies:</strong>
-          <ul>
-            {watch("hobbies")?.map((hobby, index) => (
-              <li key={index}>{hobby.hobby}</li>
-            ))}
-          </ul>
-        </li>
-      </ul>
-    </div>
-
-
+          <h1 className="text-2xl text-white strong m-auto py-4">Result</h1>
+          <div className="p-4 border rounded flex flex-col items-center">
+            <h2 className="text-2xl text-white strong m-auto py-4">Form Summary:</h2>
+            <ul className=" text-white">
+              <li>
+                <strong>Username:</strong> {watch("username")}
+              </li>
+              <li>
+                <strong>Password:</strong> {watch("password")}
+              </li>
+              <li>
+                <strong>Email:</strong> {watch("email")}
+              </li>
+              <li>
+                <strong>Name:</strong> {watch("name")}
+              </li>
+              <li>
+                <strong>Surname:</strong> {watch("surname")}
+              </li>
+              <li>
+                <strong>Hobbies:</strong>
+                <ul>
+                  {watch("hobbies")?.map((hobby, index) => (
+                    <li key={index}>{hobby.hobby}</li>
+                  ))}
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div className="flex justify-between my-2">
           <Button label="Back" onClick={prevStep}></Button>
-          <Button label="Send" type="submit"></Button>
+          <Button className="bg-cyan-600 hover:bg-cyan-700" label="Send" type="submit"></Button></div>
         </form>
       )}
     </div>

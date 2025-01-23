@@ -11,15 +11,19 @@ export const Input = forwardRef(
   ({ label, error, ...rest }: Props, ref: Ref<HTMLInputElement>) => {
     const id = useId();
     return (
-      <div>
-        <label className="mr-2" htmlFor={id}>
-          {label}
-        </label>
-        <input id={id} ref={ref} {...rest} className={clsx({
-            " border-2 border-red-500 text-red-500 ring-red-300 placeholder:text-red-300 focus:ring-red-500 ":
-              error, "border-2":!error,
-          })}></input>
-          {error && <p className="text-red-500"> {error?.message}</p>}
+      <div className="flex flex-col">
+        <label className="mb-1 text-zinc-400" htmlFor={id}>{label}</label>
+        <input
+          id={id}
+          ref={ref}
+          {...rest}
+          className={clsx({
+            " border-2 border-red-500 bg-zinc-600 text-white pl-2 rounded-lg ring-red-300 placeholder:text-red-300 focus:ring-red-500 ":
+              error,
+            "border-2 border-zinc-500 bg-zinc-600 text-white pl-2 rounded-lg autofill:bg-zinc-600": !error,
+          })}
+        ></input>
+        {error && <p className="text-red-500"> {error?.message}</p>}
       </div>
     );
   }
