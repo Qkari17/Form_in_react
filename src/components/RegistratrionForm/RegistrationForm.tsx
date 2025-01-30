@@ -16,8 +16,7 @@ export const RegistrationForm = () => {
     watch,
   } = useForm<RegistrationFormData>({
     resolver: zodResolver(validationSchema),
-    mode: "onChange",
-    defaultValues: {
+      defaultValues: {
       hobbies: [{ hobby: "" }],
     },
   });
