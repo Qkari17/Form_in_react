@@ -9,6 +9,8 @@ import { UserHobbies } from "./UserHobbies";
 import { Result } from "./Result";
 import { EndScreen } from "./EndScreen";
 
+import { StepShow } from "./StepShow";
+
 export const RegistrationForm = () => {
   const [step, setStep] = useState(1);
   const {
@@ -20,7 +22,7 @@ export const RegistrationForm = () => {
     watch,
   } = useForm<RegistrationFormData>({
     resolver: zodResolver(validationSchema),
-      defaultValues: {
+    defaultValues: {
       hobbies: [{ hobby: "" }],
     },
   });
@@ -52,16 +54,42 @@ export const RegistrationForm = () => {
       setStep((prev) => prev + 1);
     }
   };
- 
+
   const prevStep = () => setStep((prev) => prev - 1);
 
   return (
-    <div className=" relative border px-10 py-5 bg-zinc-700 rounded-2xl flex justify-center max-w-96">
-      <div className="absolute right-3 top-3 text-white text-lg"> {step}/5</div>
-      {step === 1 && <UserBaseInfo register={register} errors={errors} nextStep={nextStep} />}
-      {step === 2 && <UserPersonalInfo register={register} errors={errors} nextStep={nextStep} prevStep={prevStep} />}
-      {step === 3 && <UserHobbies register={register} errors={errors} fields={fields} append={append} remove={remove} nextStep={nextStep} prevStep={prevStep} />}
-      {step === 4 && <Result watch={watch} handleSubmit={handleSubmit} handleRegistrationForm={handleRegistrationForm} prevStep={prevStep} />}
+    <div className=" flex flex-col border border-black px-10 py-5 bg-zinc-700 rounded-2xl justify-center w-80 lg:mx-96 lg:w-screen lg:mt-12  lg:p-20">
+     {step <= 4 && <StepShow step={step} />}
+      {step === 1 && (
+        <UserBaseInfo register={register} errors={errors} nextStep={nextStep} />
+      )}
+      {step === 2 && (
+        <UserPersonalInfo
+          register={register}
+          errors={errors}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
+      )}
+      {step === 3 && (
+        <UserHobbies
+          register={register}
+          errors={errors}
+          fields={fields}
+          append={append}
+          remove={remove}
+          nextStep={nextStep}
+          prevStep={prevStep}
+        />
+      )}
+      {step === 4 && (
+        <Result
+          watch={watch}
+          handleSubmit={handleSubmit}
+          handleRegistrationForm={handleRegistrationForm}
+          prevStep={prevStep}
+        />
+      )}
       {step === 5 && <EndScreen />}
     </div>
   );

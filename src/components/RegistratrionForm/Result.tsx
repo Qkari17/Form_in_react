@@ -11,8 +11,10 @@ export const Result = ({
     className="flex flex-col gap-2"
     onSubmit={handleSubmit(handleRegistrationForm)}
   >
-    <h1 className="text-2xl text-white strong m-auto py-4">Result</h1>
-    <ul className="text-white">
+    <h1 className="text-2xl text-white strong m-auto py-4 lg:text-4xl">
+      Result
+    </h1>
+    <ul className="text-white lg:text-2xl lg:m-auto">
       <li>
         <strong>Username:</strong> {watch("username")}
       </li>
@@ -32,7 +34,7 @@ export const Result = ({
         ))}
       </li>
     </ul>
-    <div className="flex justify-between my-2">
+    <div className="flex justify-between my-2 lg:justify-end lg:gap-2">
       <Button label="Back" onClick={prevStep} />
       <Button
         className="bg-cyan-600 hover:bg-cyan-700"

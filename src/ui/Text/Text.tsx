@@ -6,6 +6,6 @@ type Props = {
 };
 
 export const Text = ({ children, className }: Props) => {
-  const baseClass = "";
+  const baseClass = "text-4xl";
   return <p className={clsx(baseClass, className)}>{children}</p>;
 };
