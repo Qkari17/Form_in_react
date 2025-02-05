@@ -1,3 +1,4 @@
+import { FieldArrayWithId, FieldErrors, UseFieldArrayAppend, UseFieldArrayRemove, UseFormHandleSubmit, UseFormRegister, UseFormWatch } from "react-hook-form";
 import { z } from "zod";
 
 export const validationSchema = z.object({
@@ -16,3 +17,25 @@ export const validationSchema = z.object({
 });
 
 export type RegistrationFormData = z.infer<typeof validationSchema>;
+
+export interface StepProps {
+  register: UseFormRegister<RegistrationFormData>;
+  errors: FieldErrors<RegistrationFormData>;
+  nextStep: () => void;
+  prevStep?: () => void; // Opcjonalny dla 1. kroku
+}
+
+// Rozszerzony interfejs dla kroków z obsługą tablicy (hobbies)
+export interface StepWithArrayProps extends StepProps {
+  fields: FieldArrayWithId<RegistrationFormData, "hobbies", "id">[];
+  append: UseFieldArrayAppend<RegistrationFormData, "hobbies">;
+  remove: UseFieldArrayRemove;
+}
+
+// Rozszerzony interfejs dla podsumowania (ostatniego kroku)
+export interface StepSummaryProps {
+  watch: UseFormWatch<RegistrationFormData>;
+  handleSubmit: UseFormHandleSubmit<RegistrationFormData>;
+  handleRegistrationForm: (data: RegistrationFormData) => void;
+  prevStep: () => void;
+}
