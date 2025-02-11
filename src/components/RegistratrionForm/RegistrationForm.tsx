@@ -36,8 +36,7 @@ export const RegistrationForm = () => {
     data
   ) => {
     console.log(data);
-    setStep((prev) => prev + 1);
-  };
+      };
 
   const nextStep = async () => {
     let isValid = false;
